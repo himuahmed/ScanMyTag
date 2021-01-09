@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace ScanMyTag.Controllers
     public class QRCodeController : Controller
     {
         private readonly IQRCodeRepository _qrCodeRepository;
+        
         public QRCodeController(IQRCodeRepository qrCodeRepository)
         {
             _qrCodeRepository = qrCodeRepository;
+            
         }
 
         [Route("ContactQR")]
@@ -46,6 +49,7 @@ namespace ScanMyTag.Controllers
             var result = await _qrCodeRepository.GetContactQrByScanning(url);
             return View(result);
         }
+
 
     }
 }

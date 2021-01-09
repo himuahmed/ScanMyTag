@@ -15,7 +15,7 @@ namespace ScanMyTag.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Enter your contact details.")]
-        [Display(Name = "Contact Details:")]
+        [Display(Name = "Your Text:")]
         public string Contact { get; set; }
         public string Url { get; set; }
         public string QrCode { get; set; }

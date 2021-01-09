@@ -31,6 +31,7 @@ namespace ScanMyTag
             services.AddScoped<IQRGeneratorService, QRGeneratorService>();
             services.AddScoped<IQRCodeRepository, QRCodeRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

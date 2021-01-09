@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -71,8 +73,8 @@ namespace ScanMyTag.Repository
                 QrCode = qr.QrCode,
                 Url = qr.Url
             }).FirstOrDefaultAsync();
-
             return result;
         }
+
     }
 }
