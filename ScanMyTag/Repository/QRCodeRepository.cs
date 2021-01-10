@@ -36,15 +36,15 @@ namespace ScanMyTag.Repository
         }
         public async Task<int> CreateContactQR(ContactQRModel contactQrModel)
         {
-
+            string domainUrl = this.baseUrl();
             Guid guid = Guid.NewGuid();
-            //string baseUrl = domainUrl + "/contact-me/" + guid.ToString();
+            string baseUrl = domainUrl + "/contact-me/" + guid.ToString();
             var newContactQr = new ContactQR()
             {
                 Contact = contactQrModel.Contact,
                 Name = contactQrModel.Name,
                 Url = guid.ToString(),
-                QrCode = _qrGeneratorService.GenerateQR(guid.ToString())
+                QrCode = _qrGeneratorService.GenerateQR(baseUrl)
             };
 
             await _context.ContactQr.AddAsync(newContactQr);
