@@ -39,7 +39,7 @@
                 <h5 class="card-title text-center">@Model.Name</h5><hr/>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a>@Model.Contact</a>
+                        @Html.Raw(@Model.Contact)
                     </div>
                 </div>
             </div>

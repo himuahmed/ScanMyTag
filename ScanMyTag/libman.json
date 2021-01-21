@@ -33,6 +33,10 @@
     {
       "library": "ckeditor@4.15.1",
       "destination": "wwwroot/lib/ckeditor/"
+    },
+    {
+      "library": "ckeditor5@24.0.0",
+      "destination": "wwwroot/lib/ckeditor5/"
     }
   ]
 }
