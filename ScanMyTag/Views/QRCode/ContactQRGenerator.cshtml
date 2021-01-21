@@ -4,39 +4,41 @@
     ViewData["Title"] = "Contact Me";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<div class="container">
-    <div class="justify-content-center align-items-center">
+<script src="~/ckeditor/ckeditor.js"></script>
+<div>
+    <div class="container centeredItem">
         <div class="row">
-            <div class="col-md-4">
-                @if (ViewBag.isSuccess == true)
-                {
-                    <div class="alert alert-success" role="alert">
-                        Your QR Code is Generated.
-                    </div>
+                <div class=" col-md-2"></div>
+                <div class=" col-md-8">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            @if (ViewBag.isSuccess == true)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    Your QR Code is Generated.
+                                </div>
 
-                }
-                <form asp-action="ContactQRGenerator">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control"/>
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                            }
+                            <form asp-action="ContactQRGenerator">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="Name"></label>
+                                    <input asp-for="Name" class="form-control"/>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label asp-for="Contact"></label>
+                                    <textarea  asp-for="Contact" class="form-control"></textarea>
+                                    <span asp-validation-for="Contact" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Generate QR" class="btn btn-danger"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Contact" class="control-label"></label>
-                        <input asp-for="Contact" class="form-control"/>
-                        <span asp-validation-for="Contact" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Generate QR" class="btn btn-primary"/>
-                    </div>
-                </form>
+                </div>
+            <div class="col-md-2"></div>
             </div>
-        </div>
-
     </div>
-
-
 </div>

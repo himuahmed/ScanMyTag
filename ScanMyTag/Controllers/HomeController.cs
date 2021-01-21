@@ -16,10 +16,9 @@ namespace ScanMyTag.Controllers
             _qrCodeRepository = qrCodeRepository;
         }
 
-        public async Task<ViewResult> Index()
+        public ViewResult Index()
         {
-            var qrCodes = await _qrCodeRepository.GetAllQrCodes();
-            return View(qrCodes);
+            return View();
         }
 
 

@@ -1,17 +1,4 @@
-﻿@model IEnumerable<QRModel>
+﻿@*@{
+    Layout = null;
+}*@
 
-<div class="container">
-    <div class="row">
-
-        @foreach (var qr in Model)
-        {
-            <div class="col-md-2">
-                <partial name="_tagThumbnail" model="@qr" />
-            </div>
-        }
-    <div class="align-middle">
-        
-        <a asp-controller="QRCode" asp-action="ContactQRGenerator"><i class="far fa-plus-square fa-10x align-middle"></i></a>
-    </div>
-    </div>
-</div>

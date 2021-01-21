@@ -31,6 +31,7 @@ namespace ScanMyTag
             services.AddScoped<IQRGeneratorService, QRGeneratorService>();
             services.AddScoped<IQRCodeRepository, QRCodeRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
         }
 

@@ -6,7 +6,7 @@
 body {
     font-family: sans-serif;
     font-size: 1em;
-    color: #333;
+    color: white;
 }
 
 h1 {
@@ -19,7 +19,7 @@ em {
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: white;
 }
 
 /* Layout */
@@ -45,7 +45,7 @@ a {
     top: 0;
     left: 0;
     width: 13%;
-    height: 3.5em;
+    height: 7.3%;
     background: #192b3c;
 }
 
@@ -58,13 +58,13 @@ a {
 .s-sidebar__nav {
     z-index: 2;
     position: fixed;
-    top: 0;
+    top: 5.6%;
     left: -15em;
     overflow: hidden;
     transition: all .3s ease-in;
     width: 15em;
     height: 100%;
-    background: #243e56;
+    background: #ADB5BD;
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -131,10 +131,11 @@ a {
     /* Sidebar */
     .s-sidebar__trigger {
         width: 4em;
+        height: 5.8%;
     }
 
     .s-sidebar__nav {
-        width: 4em;
+        width: 14em;
         left: 0;
     }
 

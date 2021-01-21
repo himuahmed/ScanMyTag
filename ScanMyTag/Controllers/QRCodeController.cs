@@ -20,6 +20,14 @@ namespace ScanMyTag.Controllers
             
         }
 
+        [Route("dashboard")]
+        public async Task<ViewResult> DashBoard (bool isSuccess = false)
+        {
+            var qrCodes = await _qrCodeRepository.GetAllQrCodes();
+            return View(qrCodes);
+        }
+    
+
         [Route("ContactQR")]
         public IActionResult ContactQRGenerator(bool isSuccess = false)
         {
@@ -27,6 +35,8 @@ namespace ScanMyTag.Controllers
             ViewBag.isSuccess = isSuccess;
             return View(model);
         }
+
+
 
         [HttpPost]
         [Route("ContactQR")]
