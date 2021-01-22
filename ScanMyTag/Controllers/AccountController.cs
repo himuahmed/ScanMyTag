@@ -40,11 +40,53 @@ namespace ScanMyTag.Controllers
 
                   return View(registrationModel);
               }
-                ModelState.Clear();
-                return RedirectToAction(nameof(Register), new {isSuccess = true});
+              ModelState.Clear();
+              return RedirectToAction(nameof(Register), new {isSuccess = true});
               
             }
             return View();
+        }
+
+        [Route("login")]
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> SignIn(SignInModel signInModel, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.SignIn(signInModel);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error signing in");
+                }
+            }
+            return View(signInModel);
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _accountRepository.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> ChangePassword()
+        {
+            return null;
         }
 
     }

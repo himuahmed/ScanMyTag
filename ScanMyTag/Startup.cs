@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ScanMyTag.Data;
+using ScanMyTag.Helpers;
 using ScanMyTag.Models;
 using ScanMyTag.Repository;
 using ScanMyTag.Service;
@@ -33,11 +34,16 @@ namespace ScanMyTag
             services.AddScoped<IQRGeneratorService, QRGeneratorService>();
             services.AddScoped<IQRCodeRepository, QRCodeRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserClaimsPrincipalFactory<UserModel>, AplicationUserClaimsPrincipalFactory>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<ScanMyTagContext>();
             //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
-
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = _configuration["ApplicationSettings:LoginPath"];
+            });
 
             services.Configure<IdentityOptions>(option =>
             {
@@ -62,6 +68,7 @@ namespace ScanMyTag
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

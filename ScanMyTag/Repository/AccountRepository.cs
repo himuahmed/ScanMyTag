@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ScanMyTag.Models;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace ScanMyTag.Repository
 {
     public class AccountRepository : IAccountRepository
     {
         
-        private UserManager<UserModel> _identityUserManager;
+        private readonly UserManager<UserModel> _identityUserManager;
+        private readonly SignInManager<UserModel> _signInManager;
 
-        public AccountRepository(UserManager<UserModel> identityUserManager)
+        public AccountRepository(UserManager<UserModel> identityUserManager,SignInManager<UserModel> signInManager)
         {
             _identityUserManager = identityUserManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IdentityResult> register(RegistrationModel registrationModel)
@@ -31,6 +34,17 @@ namespace ScanMyTag.Repository
             var result = await _identityUserManager.CreateAsync(newUser, registrationModel.Password);
             return result;
 
+        }
+
+        public async Task<SignInResult> SignIn(SignInModel signInModel)
+        {
+            return await _signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password,
+                signInModel.RememberMe, false);
+        }
+
+        public async Task SignOut()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }

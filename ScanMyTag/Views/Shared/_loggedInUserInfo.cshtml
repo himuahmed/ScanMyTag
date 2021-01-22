@@ -1,0 +1,31 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<UserModel> _signInManager;
+
+@if (_signInManager.IsSignedIn(User))
+{
+
+        @*<a class="nav-link active">Hello @User.FindFirst("Name").Value</a>
+
+        <a class="nav-link active" asp-action="Logout" asp-controller="Account">Logout</a>
+
+    <a class="nav-link active" asp-action="ChangePassword" asp-controller="Account">Change password</a>*@
+
+
+    <div class="dropdown">
+        <a class="nav-link dropdown-toggle" style="color: white; font-weight: bold; font-family: sans-serif" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello, @User.FindFirst("Name").Value
+        </a>
+        <div class="dropdown-menu mr-4 mt-2" style="        background-color: #D9534F
+" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item"  asp-controller="QRCode" asp-action="DashBoard">DashBoard</a>
+                <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Account">Edit Profile</a>
+            <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
+        </div>
+    </div>
+
+}
+else
+{
+    <a class="btn btn-outline-primary mr-2" style="color: white" type="button" asp-controller="Account" asp-action="SignIn" asp-route-returnUrl="@Context.Request.Path">Login</a>
+    <a class="btn btn-outline-primary" style="color: white" type="button" asp-controller="Account" asp-action="Register">Register</a>
+}
