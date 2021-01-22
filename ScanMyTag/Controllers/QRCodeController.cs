@@ -29,10 +29,12 @@ namespace ScanMyTag.Controllers
     
 
         [Route("ContactQR")]
-        public IActionResult ContactQRGenerator(bool isSuccess = false)
+        public IActionResult ContactQRGenerator(string tagName,bool isSuccess = false)
         {
             var model = new ContactQRModel();
             ViewBag.isSuccess = isSuccess;
+            ViewBag.tagName = tagName;
+
             return View(model);
         }
 
@@ -47,7 +49,7 @@ namespace ScanMyTag.Controllers
                 int id = await _qrCodeRepository.CreateContactQR(contactQrModel);
                 if (id > 0)
                 {
-                    return RedirectToAction(nameof(ContactQRGenerator), new {isSuccess = true});
+                    return RedirectToAction(nameof(ContactQRGenerator), new {isSuccess = true, tagName = contactQrModel.Name});
                 }
             }
             return View();

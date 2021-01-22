@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ScanMyTag.Data;
+using ScanMyTag.Models;
 using ScanMyTag.Repository;
 using ScanMyTag.Service;
 
@@ -30,9 +32,23 @@ namespace ScanMyTag
             services.AddDbContext<ScanMyTagContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IQRGeneratorService, QRGeneratorService>();
             services.AddScoped<IQRCodeRepository, QRCodeRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<ScanMyTagContext>();
             //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
+
+
+            services.Configure<IdentityOptions>(option =>
+            {
+                option.Password.RequireDigit = true;
+                option.Password.RequireUppercase = true;
+                option.Password.RequiredLength = 6;
+                option.Password.RequireLowercase = true;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequiredUniqueChars = 0;
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +61,7 @@ namespace ScanMyTag
 
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

@@ -15,9 +15,8 @@
                             @if (ViewBag.isSuccess == true)
                             {
                                 <div class="alert alert-success" role="alert">
-                                    Your QR Code is Generated.
+                                    Your QR Code is Generated with name "<strong>@ViewBag.tagName</strong>".
                                 </div>
-
                             }
                             <form asp-action="ContactQRGenerator">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

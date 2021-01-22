@@ -1,0 +1,66 @@
+﻿@model ScanMyTag.Models.RegistrationModel
+    <link href="~/css/global.css" rel="stylesheet" />
+<div class="container-fluid mt-4">
+    <div class="centeredItem">
+        @if (ViewBag.isSuccess == true)
+        {
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Registration successful ! </strong>Click<a href="#" class="alert-link">Log In</a> to continue.
+            </div>
+        }
+        <div asp-validation-summary="ModelOnly" class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        <div class="card mb-5 shadow-sm text-white bg-info">
+            <div class="card-body">
+                <h3 class="card-title text-center">Register</h3><hr />
+                <form asp-action="register">
+
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Anakin Skywalker" />
+                            <span asp-validation-for="Name" class="text-muted"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" placeholder="anakin@darkseid.com" />
+                            <span asp-validation-for="Email" class="text-muted"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4" id="birthdate">
+                            <label asp-for="BirthDate" class="control-label"></label>
+                            <input asp-for="BirthDate" class="form-control datetimefield" placeholder="dd-mm-yyyy" />
+                            <span asp-validation-for="BirthDate" class="text-muted"></span>
+
+                        </div>
+                        <div class="col-md-8">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" placeholder="Tatooine" />
+                            <span asp-validation-for="Address" class="text-muted"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" placeholder="**********" />
+                            <span asp-validation-for="Password" class="text-secondary"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="**********" />
+                            <span asp-validation-for="ConfirmPassword" class="text-secondary"></span>
+                        </div>
+                    </div>
+                    <input class="btn btn-light" type="submit" value="Register"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
