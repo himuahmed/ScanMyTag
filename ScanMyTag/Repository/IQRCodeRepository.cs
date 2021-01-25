@@ -11,5 +11,6 @@ namespace ScanMyTag.Repository
         Task<int> CreateContactQR(ContactQRModel contactQrModel);
         Task<List<QRModel>> GetAllQrCodes();
         Task<ContactQRModel> GetContactQrByScanning(string url);
+        Task<int> DeleteQR(int id);
     }
 }

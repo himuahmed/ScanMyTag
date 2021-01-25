@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ScanMyTag.Data;
 using ScanMyTag.Models;
@@ -58,6 +59,7 @@ namespace ScanMyTag.Repository
         {
             return await _context.ContactQr.Select(qr => new QRModel()
             {
+                Id = qr.Id,
                 Name = qr.Name,
                 Url = qr.Url,
                 QrCode = qr.QrCode
@@ -68,11 +70,20 @@ namespace ScanMyTag.Repository
         {
             var result= await _context.ContactQr.Where(qr => qr.Url == url).Select(qr => new ContactQRModel()
             {
+                Id = qr.Id,
                 Name = qr.Name,
                 Contact = qr.Contact,
                 QrCode = qr.QrCode,
                 Url = qr.Url
             }).FirstOrDefaultAsync();
+            return result;
+        }
+
+        public async Task<int> DeleteQR(int id)
+        {
+            var qr = new ContactQR(){ Id = id};
+            _context.Remove(qr); 
+            int result = await _context.SaveChangesAsync();
             return result;
         }
 

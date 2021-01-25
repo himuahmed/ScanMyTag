@@ -6,7 +6,8 @@
         <h5 class="card-title"><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h5>
         <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="@Model.QrCode" target="new">Download</a>
+                <a class="btn btn-sm btn-outline-secondary mr-2" href="@Model.QrCode" target="new">Download</a>
+                <a class="btn btn-sm btn-outline-secondary" asp-controller="QRCode" asp-action="DeleteQrById" asp-route-id="@Model.Id" target="new">Delete</a>
             </div>
         </div>
     </div>

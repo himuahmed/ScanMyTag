@@ -64,6 +64,19 @@ namespace ScanMyTag.Controllers
             return View(result);
         }
 
+        [Route("deleteQr/{id}")]
+        public async Task<RedirectToActionResult> DeleteQrById(int id)
+        {
+           var result = await _qrCodeRepository.DeleteQR(id);
+           if (result > 0)
+           {
+               return RedirectToAction("DashBoard");
+           }
+           else
+           {
+               return RedirectToAction("DashBoard");
+           }
+        }
 
     }
 }
