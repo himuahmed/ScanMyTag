@@ -3,12 +3,17 @@
 <div class="card mb-2 shadow-sm">
     <img src="@(string.IsNullOrEmpty(Model.QrCode) ? "/images/noimage.png" : Model.QrCode)" class="img-thumbnail" />
     <div class="card-body">
-        <h5 class="card-title"><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h5>
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary mr-2" href="@Model.QrCode" target="new">Download</a>
-                <a class="btn btn-sm btn-outline-secondary" asp-controller="QRCode" asp-action="DeleteQrById" asp-route-id="@Model.Id" target="new">Delete</a>
+        <h5 class="card-title "><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h5>
+        <div class="d-flex justify-content-center">
+            @*<div class="btn-group">
+                <a class="btn btn-sm btn-outline-secondary mr-2" href="@Model.QrCode" target="new">Download</a>*@
+                @*<a class="btn btn-sm btn-outline-secondary" asp-controller="QRCode" asp-action="DeleteQrById" asp-route-id="@Model.Id" target="new">Delete</a>*@
+            <div class="btn-group btn-group-sm" role="group">
+                <a type="button" class="btn btn-primary pr-4 pl-4" href="@Model.QrCode" target="new"><i class="fas fa-cloud-download-alt"></i></a>
+                <a type="button" class="btn btn-success pr-4 pl-4" asp-controller="QRCode" asp-action="EditQr" asp-route-id="@Model.Id" target="new"><i class="far fa-edit"></i></a>
+                <a type="button" class="btn btn-danger pr-4 pl-4" asp-controller="QRCode" asp-action="DeleteQrById" asp-route-id="@Model.Id" target="new"><i class="far fa-trash-alt"></i></a>
             </div>
+            @*</div>*@
         </div>
     </div>
 </div>

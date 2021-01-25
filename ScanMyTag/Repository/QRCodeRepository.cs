@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -85,6 +86,28 @@ namespace ScanMyTag.Repository
             _context.Remove(qr); 
             int result = await _context.SaveChangesAsync();
             return result;
+        }
+
+        public async Task<ContactQR> GetQrById(int id)
+        {
+            var qrTag = await _context.ContactQr.Where(x => x.Id == id).Select(qr => new ContactQR()
+                {
+                    Id = qr.Id,
+                    Name = qr.Name,
+                    Contact = qr.Contact,
+                    QrCode = qr.QrCode,
+                    Url = qr.Url
+            }).FirstOrDefaultAsync();
+            return qrTag;
+        }
+
+        public async Task<bool> UpdateQrTag(ContactQR contactQr)
+        {
+            var qrTag = await GetQrById(contactQr.Id);
+            contactQr.QrCode = qrTag.QrCode;
+            contactQr.Url = qrTag.Url;
+           _context.ContactQr.Update(contactQr);
+           return await _context.SaveChangesAsync()>0;
         }
 
     }

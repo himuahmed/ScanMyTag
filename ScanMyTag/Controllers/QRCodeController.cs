@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ScanMyTag.Data;
 using ScanMyTag.Models;
 using ScanMyTag.Repository;
 using ScanMyTag.Service;
@@ -76,6 +77,31 @@ namespace ScanMyTag.Controllers
            {
                return RedirectToAction("DashBoard");
            }
+        }
+
+        [Route("edittag/{id}")]
+        public async Task<IActionResult> EditQr(int id)
+        {
+            var qrTag = await _qrCodeRepository.GetQrById(id);
+            return View(qrTag);
+        }
+
+        [HttpPost]
+        [Route("edittag/{id}")]
+        public async Task<IActionResult> EditQr(ContactQR contactQr,int Id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _qrCodeRepository.UpdateQrTag(contactQr);
+                if (result)
+                {
+                    return RedirectToAction("DashBoard");
+                }
+
+                return View();
+            }
+
+            return View();
         }
 
     }

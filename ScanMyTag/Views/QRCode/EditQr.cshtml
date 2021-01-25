@@ -1,0 +1,41 @@
+﻿@model ScanMyTag.Data.ContactQR
+
+<script src="~/lib/ckeditor/ckeditor.js"></script>
+<div>
+    <div class="container centeredItem">
+        <div class="row">
+            <div class=" col-md-1"></div>
+            <div class=" col-md-10">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        @if (ViewBag.isSuccess == true)
+                        {
+                            <div class="alert alert-success" role="alert">
+                                Your QR Code is Generated with name "<strong>@ViewBag.tagName</strong>".
+                            </div>
+                        }
+                        <form asp-action="EditQr">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Name"></label>
+                                <input asp-for="Name" class="form-control" value="@Model.Name"/>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Contact"></label>
+                                <textarea asp-for="Contact" id="Contact" class="form-control">@Model.Contact</textarea>
+                                <span asp-validation-for="Contact" class="text-danger"></span>
+                                <script>CKEDITOR.replace("Contact");</script>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Generate QR" class="btn btn-danger" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</div>
+
