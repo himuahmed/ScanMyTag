@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ScanMyTag.Data;
 
 namespace ScanMyTag.Migrations
 {
     [DbContext(typeof(ScanMyTagContext))]
-    partial class ScanMyTagContextModelSnapshot : ModelSnapshot
+    [Migration("20210125230349_qr-user-relation")]
+    partial class qruserrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,12 +171,15 @@ namespace ScanMyTag.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("ContactQr");
                 });
@@ -201,12 +206,15 @@ namespace ScanMyTag.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("ContactQRModel");
                 });
@@ -340,7 +348,7 @@ namespace ScanMyTag.Migrations
                 {
                     b.HasOne("ScanMyTag.Models.UserModel", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("User");
                 });
@@ -349,7 +357,7 @@ namespace ScanMyTag.Migrations
                 {
                     b.HasOne("ScanMyTag.Models.UserModel", "User")
                         .WithMany("ContactQrTags")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("User");
                 });

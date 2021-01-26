@@ -11,6 +11,8 @@ namespace ScanMyTag.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Enter name of your tag.")]
+        [MaxLength(16,ErrorMessage = "Name can not exceeds 16 character.")]
+        [MinLength(1, ErrorMessage = "Enter a tag name.")]
         [Display(Name = "Tag Name:")]
         public string Name { get; set; }
 
@@ -19,5 +21,7 @@ namespace ScanMyTag.Models
         public string Contact { get; set; }
         public string Url { get; set; }
         public string QrCode { get; set; }
+        public UserModel User { get; set; }
+
     }
 }

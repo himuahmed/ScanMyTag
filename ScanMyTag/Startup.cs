@@ -39,6 +39,7 @@ namespace ScanMyTag
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<ScanMyTagContext>();
+            services.AddHttpContextAccessor();
             //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
             services.ConfigureApplicationCookie(config =>
             {

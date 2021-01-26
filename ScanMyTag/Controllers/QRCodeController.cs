@@ -16,18 +16,25 @@ namespace ScanMyTag.Controllers
     public class QRCodeController : Controller
     {
         private readonly IQRCodeRepository _qrCodeRepository;
+        private readonly IUserService _userService;
         
-        public QRCodeController(IQRCodeRepository qrCodeRepository)
+        public QRCodeController(IQRCodeRepository qrCodeRepository,IUserService userService)
         {
             _qrCodeRepository = qrCodeRepository;
-            
+            _userService = userService;
+
         }
 
         [Route("dashboard")]
         public async Task<ViewResult> DashBoard (bool isSuccess = false)
         {
             var qrCodes = await _qrCodeRepository.GetAllQrCodes();
-            return View(qrCodes);
+            if (qrCodes != null)
+            {
+                return View(qrCodes);
+            }
+            throw new Exception("Couldn't fetch your tags.");
+            
         }
 
         
@@ -54,6 +61,8 @@ namespace ScanMyTag.Controllers
                 {
                     return RedirectToAction(nameof(ContactQRGenerator), new {isSuccess = true, tagName = contactQrModel.Name});
                 }
+
+                return View();
             }
             return View();
         }
@@ -75,20 +84,30 @@ namespace ScanMyTag.Controllers
            }
            else
            {
-               return RedirectToAction("DashBoard");
+               throw new Exception("Couldn't delete your tag.");
            }
         }
 
         [Route("edittag/{id}")]
         public async Task<IActionResult> EditQr(int id)
         {
+            var userId = _userService.GetUserId();
             var qrTag = await _qrCodeRepository.GetQrById(id);
-            return View(qrTag);
+            if (qrTag != null)
+            {
+                if (qrTag.User.Id == userId)
+                {
+                    return View(qrTag);
+                }
+                throw new Exception("Permission Denied.");
+            }
+            throw new Exception("Couldn't fetch your tag.");
+           
         }
 
         [HttpPost]
         [Route("edittag/{id}")]
-        public async Task<IActionResult> EditQr(ContactQR contactQr,int Id)
+        public async Task<IActionResult> EditQr(ContactQRModel contactQr, int Id)
         {
             if (ModelState.IsValid)
             {

@@ -8,9 +8,10 @@ namespace ScanMyTag.Models
 {
     public class UserModel :IdentityUser
     {
+
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }
-
+        public ICollection<ContactQRModel> ContactQrTags { get; set; }
     }
 }

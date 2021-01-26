@@ -19,17 +19,19 @@
                                 </div>
                             }
                             <form asp-action="ContactQRGenerator">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div asp-validation-summary="ModelOnly" class="text-white"></div>
                                 <div class="form-group mb-3">
                                     <label asp-for="Name"></label>
-                                    <input asp-for="Name" class="form-control"/>
-                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                    <input asp-for="Name" class="form-control" placeholder="Anakin was here."/>
+                                    <span asp-validation-for="Name" class="text-white"></span>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label asp-for="Contact"></label>
                                     <textarea  asp-for="Contact" id="Contact" class="form-control"></textarea>
-                                    <span asp-validation-for="Contact" class="text-danger"></span>
-                                    <script>CKEDITOR.replace("Contact");</script>
+                                    <span asp-validation-for="Contact" class="text-white"></span>
+                                    <script>
+                                        CKEDITOR.replace("Contact");
+                                    </script>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Generate QR" class="btn btn-danger"/>
