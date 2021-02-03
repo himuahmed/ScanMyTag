@@ -123,15 +123,12 @@ namespace ScanMyTag.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Route("changeqrprivacy/{id}")]
-        public async Task<IActionResult> ChangeQrPrivacy(int id)
+
+        public async Task<RedirectToActionResult> ChangeQrPrivacy(int Qrid)
         {
-            if (await _qrCodeRepository.UpdateQrPrivacy(id))
-                return Ok();
-            return NotFound("Couldn't change privacy");
-
-
+            int id = Qrid;
+            await _qrCodeRepository.UpdateQrPrivacy(id);
+            return RedirectToAction("DashBoard");
         }
 
     }

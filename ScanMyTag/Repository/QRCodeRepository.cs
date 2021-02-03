@@ -117,6 +117,7 @@ namespace ScanMyTag.Repository
                 {
                     User = qr.User,
                     Id = qr.Id,
+                    Enabled = qr.Enabled,
                     Name = qr.Name,
                     Contact = qr.Contact,
                     QrCode = qr.QrCode,
@@ -147,7 +148,7 @@ namespace ScanMyTag.Repository
         public async Task<bool> UpdateQrPrivacy(int id)
         {
             var qrTag = await GetQrById(id);
-            if (qrTag.Enabled == true)
+            if(qrTag.Enabled)
             {
                 qrTag.Enabled = false;
             }
