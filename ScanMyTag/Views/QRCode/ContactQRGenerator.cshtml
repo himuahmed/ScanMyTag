@@ -8,14 +8,17 @@
 <div>
     <div class="container centeredItem">
         <div class="row">
-                <div class=" col-1"></div>
-                <div class=" col-10">
+                <div class=" col-md-1"></div>
+                <div class=" col-md-10">
                     <div class="card bg-info text-white">
                         <div class="card-body">
                             @if (ViewBag.isSuccess == true)
                             {
                                 <div class="alert alert-success" role="alert">
                                     Your QR Code is Generated with name "<strong>@ViewBag.tagName</strong>".
+                                </div>
+                                <div class="alert alert-warning" role="alert">
+                                    By default you QR is not visible to Public. You can turn this on from your dashboard.
                                 </div>
                             }
                             <form asp-action="ContactQRGenerator">
@@ -40,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="col-1"></div>
+            <div class="col-md-1"></div>
             </div>
     </div>
 </div>

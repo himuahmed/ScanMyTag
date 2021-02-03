@@ -23,3 +23,7 @@
     box-shadow: 0 8px 50px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
+
+.img-thumbnail {
+    border: 0;
+}

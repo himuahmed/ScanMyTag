@@ -21,6 +21,8 @@ namespace ScanMyTag.Models
         public string Contact { get; set; }
         public string Url { get; set; }
         public string QrCode { get; set; }
+
+        public bool Enabled { get; set; }
         public UserModel User { get; set; }
 
     }

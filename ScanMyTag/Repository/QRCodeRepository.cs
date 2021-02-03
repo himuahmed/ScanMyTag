@@ -69,6 +69,7 @@ namespace ScanMyTag.Repository
             {
                 User = qr.User,
                 Id = qr.Id,
+                Enabled = qr.Enabled,
                 Name = qr.Name,
                 Url = qr.Url,
                 QrCode = qr.QrCode
@@ -132,6 +133,7 @@ namespace ScanMyTag.Repository
                 var qrToSave = new ContactQR()
                 {
                     Name = contactQr.Name,
+                    Enabled = qrTag.Enabled,
                     Id = contactQr.Id,
                     Contact = contactQr.Contact,
                     Url = qrTag.Url,
@@ -140,6 +142,31 @@ namespace ScanMyTag.Repository
                 _context.ContactQr.Update(qrToSave);
                 return await _context.SaveChangesAsync() > 0;
 
+        }
+
+        public async Task<bool> UpdateQrPrivacy(int id)
+        {
+            var qrTag = await GetQrById(id);
+            if (qrTag.Enabled == true)
+            {
+                qrTag.Enabled = false;
+            }
+            else
+            {
+                qrTag.Enabled = true;
+            }
+            var qrToSave = new ContactQR()
+            {
+                Name = qrTag.Name,
+                Enabled = qrTag.Enabled,
+                Id = qrTag.Id,
+                Contact = qrTag.Contact,
+                Url = qrTag.Url,
+                QrCode = qrTag.QrCode
+            };
+
+            _context.ContactQr.Update(qrToSave);
+            return await _context.SaveChangesAsync() > 0;
         }
 
     }

@@ -1,22 +1,28 @@
 ﻿@model ContactQRModel
-
-<div class="box card mb-2 shadow-sm">
-    <img src="@(string.IsNullOrEmpty(Model.QrCode) ? "/images/noimage.png" : Model.QrCode)" class="img-thumbnail" />
-    <div class="card-body">
-        <div class="row">
-            <h6 class="card-title col-12 limitDisplayText"><strong></strong><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h6>
+    <link href="~/css/Slider.css" rel="stylesheet" />
+<div class="box card mb-2 shadow-sm" style="background-color: white">
+    <div class="float-right mt-2 mr-1">
+        <label class="switch float-right">
+            <input type="checkbox" id="#privacyCheckBox@(Model.Id)" checked="@Model.Enabled" />
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <img src="@(string.IsNullOrEmpty(Model.QrCode) ? "/images/noimage.png" : Model.QrCode)" class="img-thumbnail"/>
+    @*<div class="card-body">*@
+        <div class="ml-1">
+            <h6 class="col-12 limitDisplayText"><strong></strong><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h6>
         </div>
-        <div class="justify-content-center">
-            <div class="btn-group btn-block btn-group-sm" >
+        <div class="justify-content-center m-2">
+            <div class="btn-group btn-block btn-group-sm">
                 <a type="button" class="btn btn-primary" href="@Model.QrCode" target="new"><i class="fas fa-cloud-download-alt"></i></a>
                 <a type="button" class="btn btn-success" asp-controller="QRCode" asp-action="EditQr" asp-route-id="@Model.Id"><i class="far fa-edit"></i></a>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter@(Model.Id)"><i class="far fa-trash-alt"></i></button>
             </div>
         </div>
-    </div>
+    @*</div>*@
 </div>
 
-
+<script src="~/js/QrTagPrivacyCheckBox.js"></script>
 
 
 <!--Delete Modal Modal -->

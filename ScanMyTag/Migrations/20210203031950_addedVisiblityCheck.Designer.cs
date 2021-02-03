@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ScanMyTag.Data;
 
 namespace ScanMyTag.Migrations
 {
     [DbContext(typeof(ScanMyTagContext))]
-    partial class ScanMyTagContextModelSnapshot : ModelSnapshot
+    [Migration("20210203031950_addedVisiblityCheck")]
+    partial class addedVisiblityCheck
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

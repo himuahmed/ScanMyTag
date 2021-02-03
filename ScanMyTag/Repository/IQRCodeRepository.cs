@@ -12,5 +12,6 @@ namespace ScanMyTag.Repository
         Task<int> DeleteQR(int id);
         Task<ContactQRModel> GetQrById(int id);
         Task<bool> UpdateQrTag(ContactQRModel contactQr);
+        Task<bool> UpdateQrPrivacy(int id);
     }
 }
