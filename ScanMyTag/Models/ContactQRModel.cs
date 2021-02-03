@@ -11,7 +11,7 @@ namespace ScanMyTag.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Enter name of your tag.")]
-        [MaxLength(16,ErrorMessage = "Name can not exceeds 16 character.")]
+        //[MaxLength(16,ErrorMessage = "Name can not exceeds 16 character.")]
         [MinLength(1, ErrorMessage = "Enter a tag name.")]
         [Display(Name = "Tag Name:")]
         public string Name { get; set; }

@@ -1,19 +1,18 @@
 ﻿@model ContactQRModel
 
-<div class="card mb-2 shadow-sm">
+<div class="box card mb-2 shadow-sm">
     <img src="@(string.IsNullOrEmpty(Model.QrCode) ? "/images/noimage.png" : Model.QrCode)" class="img-thumbnail" />
     <div class="card-body">
         <div class="row">
-            <h5 class="card-title col-12"><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h5>
+            <h6 class="card-title col-12 limitDisplayText"><strong></strong><a asp-route="contact-me" asp-route-url="@Model.Url">@(string.IsNullOrEmpty(Model.Name) ? "Name is not available" : Model.Name)</a></h6>
         </div>
-        <div class="d-flex justify-content-center">
-                <div class="btn-group btn-group-sm" role="group">
-                    <a type="button" class="btn btn-primary pr-4 pl-4" href="@Model.QrCode" target="new"><i class="fas fa-cloud-download-alt"></i></a>
-                    <a type="button" class="btn btn-success pr-4 pl-4" asp-controller="QRCode" asp-action="EditQr" asp-route-id="@Model.Id"><i class="far fa-edit"></i></a>
-                    <button type="button" class="btn btn-danger pr-4 pl-4" data-toggle="modal" data-target="#exampleModalCenter@(Model.Id)"><i class="far fa-trash-alt"></i></button>
-                </div>
+        <div class="justify-content-center">
+            <div class="btn-group btn-block btn-group-sm" >
+                <a type="button" class="btn btn-primary" href="@Model.QrCode" target="new"><i class="fas fa-cloud-download-alt"></i></a>
+                <a type="button" class="btn btn-success" asp-controller="QRCode" asp-action="EditQr" asp-route-id="@Model.Id"><i class="far fa-edit"></i></a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter@(Model.Id)"><i class="far fa-trash-alt"></i></button>
+            </div>
         </div>
-
     </div>
 </div>
 

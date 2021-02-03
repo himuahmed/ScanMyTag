@@ -4,3 +4,22 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
+
+.limitDisplayText {
+    width: 150px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.box {
+    box-shadow: 0 0 0 1px #E2E9ED;
+    transition: 0.2s all;
+}
+
+.box:hover {
+    z-index: 1;
+    box-shadow: 0 8px 50px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
