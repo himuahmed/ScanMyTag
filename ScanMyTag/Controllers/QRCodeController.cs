@@ -71,7 +71,15 @@ namespace ScanMyTag.Controllers
         public async Task<ViewResult> GetScannedQr(string url)
         {
             var result = await _qrCodeRepository.GetContactQrByScanning(url);
-            return View(result);
+            var userId = _userService.GetUserId();
+
+            var isOwner = await _qrCodeRepository.CheckQrOwnership(userId, result.Id);
+            
+            if(result.Enabled == true || isOwner == true)
+                return View(result);
+
+            return View();
+
         }
 
         [Route("deleteQr/{id}")]

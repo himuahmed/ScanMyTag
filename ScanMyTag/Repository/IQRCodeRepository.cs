@@ -13,5 +13,6 @@ namespace ScanMyTag.Repository
         Task<ContactQRModel> GetQrById(int id);
         Task<bool> UpdateQrTag(ContactQRModel contactQr);
         Task<bool> UpdateQrPrivacy(int id);
+        Task<bool> CheckQrOwnership(string userId, int qrId);
     }
 }

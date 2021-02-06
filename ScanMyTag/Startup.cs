@@ -48,10 +48,10 @@ namespace ScanMyTag
 
             services.Configure<IdentityOptions>(option =>
             {
-                option.Password.RequireDigit = true;
-                option.Password.RequireUppercase = true;
+                option.Password.RequireDigit = false;
+                option.Password.RequireUppercase = false;
                 option.Password.RequiredLength = 6;
-                option.Password.RequireLowercase = true;
+                option.Password.RequireLowercase = false;
                 option.Password.RequireNonAlphanumeric = false;
                 option.Password.RequiredUniqueChars = 0;
 

@@ -84,9 +84,36 @@ namespace ScanMyTag.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> ChangePassword()
+        [Route("change-password")]
+        public IActionResult ChangePassword()
         {
-            return null;
+            return View();
+        }
+
+        [HttpPost]
+        [Route("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.ChangePassword(changePasswordModel);
+
+                if (result.Succeeded)
+                {
+                    ModelState.Clear();
+                    return RedirectToAction("DashBoard", "QRCode");
+                }
+                else
+                {
+                    foreach (var err in result.Errors)
+                    {
+                        ModelState.AddModelError("", err.Description);
+                    }
+                }
+
+            }
+
+            return View();
         }
 
     }

@@ -82,6 +82,7 @@ namespace ScanMyTag.Repository
             {
                 Id = qr.Id,
                 Name = qr.Name,
+                Enabled = qr.Enabled,
                 Contact = qr.Contact,
                 QrCode = qr.QrCode,
                 Url = qr.Url
@@ -168,6 +169,14 @@ namespace ScanMyTag.Repository
 
             _context.ContactQr.Update(qrToSave);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> CheckQrOwnership(string userId, int qrId)
+        {
+            var result = await _context.ContactQr.Where(q => q.Id == qrId & q.User.Id == userId).FirstOrDefaultAsync();
+            if (result != null)
+                return true;
+            return false;
         }
 
     }

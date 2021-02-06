@@ -11,5 +11,6 @@ namespace ScanMyTag.Repository
         Task<IdentityResult> register(RegistrationModel registrationModel);
         Task<SignInResult> SignIn(SignInModel signInModel);
         Task SignOut();
+        Task<IdentityResult> ChangePassword(ChangePasswordModel changePasswordModel);
     }
 }

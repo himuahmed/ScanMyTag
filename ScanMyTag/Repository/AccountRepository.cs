@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ScanMyTag.Models;
+using ScanMyTag.Service;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace ScanMyTag.Repository
@@ -14,11 +15,13 @@ namespace ScanMyTag.Repository
         
         private readonly UserManager<UserModel> _identityUserManager;
         private readonly SignInManager<UserModel> _signInManager;
+        private readonly IUserService _userService;
 
-        public AccountRepository(UserManager<UserModel> identityUserManager,SignInManager<UserModel> signInManager)
+        public AccountRepository(UserManager<UserModel> identityUserManager,SignInManager<UserModel> signInManager, IUserService userService)
         {
             _identityUserManager = identityUserManager;
             _signInManager = signInManager;
+            _userService = userService;
         }
 
         public async Task<IdentityResult> register(RegistrationModel registrationModel)
@@ -45,6 +48,15 @@ namespace ScanMyTag.Repository
         public async Task SignOut()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            var userId = _userService.GetUserId();
+            var user = await _identityUserManager.FindByIdAsync(userId);
+
+            return await _identityUserManager.ChangePasswordAsync(user, changePasswordModel.CurrentPassword,
+                changePasswordModel.NewPassword);
         }
     }
 }
