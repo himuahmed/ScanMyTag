@@ -31,15 +31,19 @@ namespace ScanMyTag
         {
             services.AddControllersWithViews();
             services.AddDbContext<ScanMyTagContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+
             services.AddScoped<IQRGeneratorService, QRGeneratorService>();
             services.AddScoped<IQRCodeRepository, QRCodeRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserClaimsPrincipalFactory<UserModel>, AplicationUserClaimsPrincipalFactory>();
+
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<ScanMyTagContext>();
             services.AddHttpContextAccessor();
+
             //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
             services.ConfigureApplicationCookie(config =>
             {
@@ -56,6 +60,7 @@ namespace ScanMyTag
                 option.Password.RequiredUniqueChars = 0;
 
             });
+            services.Configure<SMTPModel>(_configuration.GetSection("SMTPConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
