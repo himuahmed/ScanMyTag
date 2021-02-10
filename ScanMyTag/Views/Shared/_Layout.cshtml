@@ -4,7 +4,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-
     <link href="~/css/layout.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
@@ -31,16 +30,40 @@
     </environment>
 
 </head>
-<body style="        background-color: #1C2833">
+<body  style="background-color: #1C2833">
 
-    <main>
-        @*<partial name="_sidebar" />*@
-        <div>
-            <partial name="_header" />
-            @RenderBody()
+
+    <div>
+        
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn"  onclick="closeNav()">&times;</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
         </div>
-    </main>
+        <div id="main">
+            <partial name="_header" />
+            
+            @RenderBody()
 
+        </div>
+        
+
+        
+    </div>
+    
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+</script>
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>
         <script src="~/lib/jquery-validate/jquery.validate.js"></script>
@@ -66,7 +89,5 @@
         <script src="~/lib/moment.js/moment.js"></script>
         <script src="~/js/DateTimePicker.js"></script>
     </environment>
-
-
 </body>
 </html>
