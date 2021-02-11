@@ -23,8 +23,8 @@ namespace ScanMyTag.Service
 
         public async Task SendTestEmail(EmailOptions emailOptions)
         {
-            emailOptions.Subject = "This is a test email";
-            emailOptions.Body = GetEmailBody("Email");
+            emailOptions.Subject = UpdatePlaceHolders("This is a test email for {{username}}", emailOptions.PlaceHolders );
+            emailOptions.Body = UpdatePlaceHolders(GetEmailBody("Email"), emailOptions.PlaceHolders);
 
             await SendEmail(emailOptions);
         }
@@ -64,6 +64,22 @@ namespace ScanMyTag.Service
         {
             var body = File.ReadAllText(string.Format(templatePath, emailTemplate));
             return body;
+        }
+
+        private string UpdatePlaceHolders(string text, List<KeyValuePair<string, string>> keyValuePairs)
+        {
+            if (!string.IsNullOrEmpty(text) && keyValuePairs != null)
+            {
+                foreach (var placeHolder in keyValuePairs)
+                {
+                    if (text.Contains(placeHolder.Key))
+                    {
+                        text = text.Replace(placeHolder.Key, placeHolder.Value);
+                    }
+                }
+            }
+
+            return text;
         }
     }
 }

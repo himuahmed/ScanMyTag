@@ -49,7 +49,12 @@ namespace ScanMyTag.Controllers
             
                 EmailOptions emailOptions = new EmailOptions
                 {
-                    EmailReceivers = new List<string>() { registrationModel.Email }
+                    EmailReceivers = new List<string>() { registrationModel.Email },
+
+                    PlaceHolders = new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("{{UserName}}", registrationModel.Name)
+                    }
                 };
                 await _emailService.SendTestEmail(emailOptions);
                 return RedirectToAction(nameof(Register), new {isSuccess = true});
