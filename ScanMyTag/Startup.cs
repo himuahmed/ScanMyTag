@@ -35,6 +35,7 @@ namespace ScanMyTag
             services.AddScoped<IQRGeneratorService, QRGeneratorService>();
             services.AddScoped<IQRCodeRepository, QRCodeRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserClaimsPrincipalFactory<UserModel>, AplicationUserClaimsPrincipalFactory>();
 

@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using ScanMyTag.Models;
 using ScanMyTag.Repository;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ScanMyTag.Service;
 
 namespace ScanMyTag.Controllers
 {
     public class AccountController : Controller
     {
         private IAccountRepository _accountRepository;
+        private IEmailService _emailService;
 
-        public AccountController(IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository, IEmailService emailService)
         {
             _accountRepository = accountRepository;
+            _emailService = emailService;
         }
         [Route("register")]
         public IActionResult Register(bool isSuccess = false)
@@ -41,7 +44,15 @@ namespace ScanMyTag.Controllers
                   return View(registrationModel);
               }
               ModelState.Clear();
-              return RedirectToAction(nameof(Register), new {isSuccess = true});
+
+                ///send email
+            
+                EmailOptions emailOptions = new EmailOptions
+                {
+                    EmailReceivers = new List<string>() { registrationModel.Email }
+                };
+                await _emailService.SendTestEmail(emailOptions);
+                return RedirectToAction(nameof(Register), new {isSuccess = true});
               
             }
             return View();

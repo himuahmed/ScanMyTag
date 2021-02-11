@@ -12,7 +12,7 @@ using ScanMyTag.Models;
 
 namespace ScanMyTag.Service
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private const string templatePath = @"EmailTemplates/{0}.html";
         private readonly SMTPModel _smtpOptions;
@@ -20,6 +20,15 @@ namespace ScanMyTag.Service
         {
             _smtpOptions = smptOptions.Value;
         }
+
+        public async Task SendTestEmail(EmailOptions emailOptions)
+        {
+            emailOptions.Subject = "This is a test email";
+            emailOptions.Body = GetEmailBody("Email");
+
+            await SendEmail(emailOptions);
+        }
+
         private async Task SendEmail(EmailOptions emailOptions)
         {
             MailMessage mail = new MailMessage()
