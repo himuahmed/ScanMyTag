@@ -42,7 +42,7 @@ namespace ScanMyTag
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<ScanMyTagContext>();
+            services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<ScanMyTagContext>().AddDefaultTokenProviders();
             services.AddHttpContextAccessor();
 
             //services.AddScoped<IStringToImageConverter, StringToImageConverter>();
@@ -59,6 +59,7 @@ namespace ScanMyTag
                 option.Password.RequireLowercase = false;
                 option.Password.RequireNonAlphanumeric = false;
                 option.Password.RequiredUniqueChars = 0;
+                option.SignIn.RequireConfirmedEmail = true;
 
             });
             services.Configure<SMTPModel>(_configuration.GetSection("SMTPConfig"));

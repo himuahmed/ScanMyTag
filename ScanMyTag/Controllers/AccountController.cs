@@ -86,10 +86,13 @@ namespace ScanMyTag.Controllers
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                if (result.IsNotAllowed)
                 {
-                    ModelState.AddModelError("", "Error signing in");
+                    ModelState.AddModelError("", "Users is not allowed to sign in.");
                 }
+
+                ModelState.AddModelError("", "Error signing in");
+                
             }
             return View(signInModel);
         }

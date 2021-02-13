@@ -29,6 +29,14 @@ namespace ScanMyTag.Service
             await SendEmail(emailOptions);
         }
 
+        public async Task SendEmailVerificationEmail(EmailOptions emailOptions)
+        {
+            emailOptions.Subject = UpdatePlaceHolders("Please verify your email.", emailOptions.PlaceHolders);
+            emailOptions.Body = UpdatePlaceHolders(GetEmailBody("EmailVerification"), emailOptions.PlaceHolders);
+
+            await SendEmail(emailOptions);
+        }
+
         private async Task SendEmail(EmailOptions emailOptions)
         {
             MailMessage mail = new MailMessage()
