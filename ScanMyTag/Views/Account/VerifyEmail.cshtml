@@ -1,0 +1,30 @@
+﻿@{
+    if (ViewBag.IsSucceded == true)
+    {
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="alert alert-success col-6">
+                <p>Congratulations. Your email has been verified.</p>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="alert alert-danger col-6">
+                <p>Token expired.</p>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>
+    }
+}

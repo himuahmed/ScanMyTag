@@ -16,14 +16,17 @@ namespace ScanMyTag.Service
     {
         private const string templatePath = @"EmailTemplates/{0}.html";
         private readonly SMTPModel _smtpOptions;
-        public EmailService(IOptions<SMTPModel> smptOptions)
+        private readonly IUserService _userService;
+
+        public EmailService(IOptions<SMTPModel> smptOptions,IUserService userService)
         {
+            _userService = userService;
             _smtpOptions = smptOptions.Value;
         }
 
         public async Task SendTestEmail(EmailOptions emailOptions)
         {
-            emailOptions.Subject = UpdatePlaceHolders("This is a test email for {{username}}", emailOptions.PlaceHolders );
+            emailOptions.Subject = UpdatePlaceHolders("Greetings {{Username}}.", emailOptions.PlaceHolders );
             emailOptions.Body = UpdatePlaceHolders(GetEmailBody("Email"), emailOptions.PlaceHolders);
 
             await SendEmail(emailOptions);
@@ -36,6 +39,7 @@ namespace ScanMyTag.Service
 
             await SendEmail(emailOptions);
         }
+
 
         private async Task SendEmail(EmailOptions emailOptions)
         {

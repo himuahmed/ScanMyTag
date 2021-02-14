@@ -72,6 +72,11 @@ namespace ScanMyTag.Repository
                 changePasswordModel.NewPassword);
         }
 
+        public async Task<IdentityResult> ConfirmEmail(string userId, string token)
+        {
+            return await _identityUserManager.ConfirmEmailAsync(await _identityUserManager.FindByIdAsync(userId), token);
+        }
+
         private async Task SendEmailConfirmation(UserModel user, string token)
         {
             string appDomain = _configuration.GetSection("Application:AppDomain").Value;
@@ -83,11 +88,11 @@ namespace ScanMyTag.Repository
 
                 PlaceHolders = new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("{{UserName}}", user.Name),
-                    new KeyValuePair<string, string>("{{Link}}", string.Format(appDomain+verificationLink, user.Id, tok)),
+                    new KeyValuePair<string, string>("{{Username}}", user.Name),
+                    new KeyValuePair<string, string>("{{Link}}", string.Format(appDomain+verificationLink, user.Id, token)),
                 }
             };
-            await _emailService.SendTestEmail(emailOptions);
+            await _emailService.SendEmailVerificationEmail(emailOptions);
         }
     }
 }

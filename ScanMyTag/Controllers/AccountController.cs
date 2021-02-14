@@ -47,16 +47,17 @@ namespace ScanMyTag.Controllers
 
                 ///send email
             
-                EmailOptions emailOptions = new EmailOptions
+                 EmailOptions emailOptions = new EmailOptions
                 {
                     EmailReceivers = new List<string>() { registrationModel.Email },
 
                     PlaceHolders = new List<KeyValuePair<string, string>>()
                     {
-                        new KeyValuePair<string, string>("{{UserName}}", registrationModel.Name)
+                        new KeyValuePair<string, string>("{{Username}}", registrationModel.Name)
                     }
                 };
                 await _emailService.SendTestEmail(emailOptions);
+                
                 return RedirectToAction(nameof(Register), new {isSuccess = true});
               
             }
@@ -130,6 +131,22 @@ namespace ScanMyTag.Controllers
                     }
                 }
 
+            }
+
+            return View();
+        }
+
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> VerifyEmail(string uId, string token)
+        {
+            if (!string.IsNullOrEmpty(uId) && !string.IsNullOrEmpty(token))
+            { 
+                token = token.Replace(' ', '+');
+                var result =  await _accountRepository.ConfirmEmail(uId, token);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSucceded = true;
+                }
             }
 
             return View();
