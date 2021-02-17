@@ -36,11 +36,7 @@
     <div>
         
         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn"  onclick="closeNav()">&times;</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
+            <a href="#">Profile</a>
         </div>
         <div id="main">
             <partial name="_header" />
@@ -54,14 +50,18 @@
     </div>
     
 <script>
+    var click = 0;
     function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
+        click += 1;
+        if (click === 1) {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        } else {
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            click = 0;
+        }
     }
 </script>
     <environment include="Development">

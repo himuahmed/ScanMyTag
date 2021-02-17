@@ -12,7 +12,7 @@ using ScanMyTag.Service;
 
 namespace ScanMyTag.Controllers
 {
-   
+   [Authorize]
     public class QRCodeController : Controller
     {
         private readonly IQRCodeRepository _qrCodeRepository;
@@ -67,6 +67,7 @@ namespace ScanMyTag.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [Route("contact-me/{url}", Name = "contact-me")]
         public async Task<ViewResult> GetScannedQr(string url)
         {
