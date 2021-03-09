@@ -1,9 +1,7 @@
-﻿.centeredItem {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
+﻿/*.centeredItem {
+    margin: auto;
+    max-width: 700px;
+}*/
 
 .limitDisplayText {
     width: 150px;
@@ -28,8 +26,18 @@
     border: 0;
 }
 
-.centerItem {
+.centeredItem {
     display: grid;
     justify-content: center;
     align-content: center;
+}
+
+.displayedQr {
+    position: absolute;
+    max-width: 1200px;
+    min-width: 600px;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }

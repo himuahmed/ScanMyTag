@@ -31,12 +31,12 @@
         <link href="~/css/global.css" rel="stylesheet" />
     </environment>
 </head>
-<body style="background-color: whitesmoke;">
+<body style="background-color: #1C2833;">
 @{
     if (Model == null)
     {
-        <div class="container-fluid">
-            <div class="centeredItem">
+        <div class="container">
+            <div class="displayedQr">
                 <div class="card mb-5 shadow-lg text-white bg-danger">
                     <div class="card-body">
                         
@@ -52,8 +52,8 @@
     }
     else
     {
-        <div class="container-fluid">
-            <div class="">
+        <div class="container">
+            <div class="displayedQr">
                 <div class="card mb-5 shadow-lg text-white bg-info">
                     <div class="card-body">
                         <h5 class="card-title text-center">@Model.Name</h5><hr/>
