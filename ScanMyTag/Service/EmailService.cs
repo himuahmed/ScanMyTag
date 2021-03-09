@@ -63,12 +63,18 @@ namespace ScanMyTag.Service
                 Host = _smtpOptions.Host,
                 Port = _smtpOptions.Port,
                 EnableSsl = _smtpOptions.EnableSSL,
-                UseDefaultCredentials = _smtpOptions.UseDefaultCredential,
-                Credentials =  networkCredential
+                UseDefaultCredentials = true,
+                Credentials = networkCredential
             };
+
+            //SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            //smtpClient.UseDefaultCredentials = true;
+            //smtpClient.EnableSsl = true;
+            //smtpClient.Credentials = networkCredential;
             mail.BodyEncoding = Encoding.Default;
 
             await smtpClient.SendMailAsync(mail);
+
 
         }
 

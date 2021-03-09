@@ -33,21 +33,23 @@
 <body  style="background-color: #1C2833">
 
 
-    <div>
+   
         
         <div id="mySidenav" class="sidenav">
             <a href="#">Profile</a>
         </div>
         <div id="main">
             <partial name="_header" />
-            
-            @RenderBody()
-
+            <div class="centerItem">
+                @RenderBody()
+            </div>
+               
+           
         </div>
         
 
         
-    </div>
+    
     
 <script>
     var click = 0;

@@ -28,3 +28,8 @@
     border: 0;
 }
 
+.centerItem {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}

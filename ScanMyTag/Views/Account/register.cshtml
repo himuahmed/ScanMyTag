@@ -1,7 +1,6 @@
 ﻿@model ScanMyTag.Models.RegistrationModel
     <link href="~/css/global.css" rel="stylesheet" />
-<div class="container-fluid mt-4">
-    <div class="centeredItem">
+    
         @if (ViewBag.isSuccess == true)
         {
             <div class="alert alert-dismissible alert-success">
@@ -54,12 +53,12 @@
                             <span asp-validation-for="ConfirmPassword" class="text-secondary"></span>
                         </div>
                     </div>
-                    <input class="btn btn-light" type="submit" value="Register"/>
+                    <input class="btn btn-light" type="submit" value="Register" />
                 </form>
             </div>
         </div>
-    </div>
 
-</div>
+
+
 
 
